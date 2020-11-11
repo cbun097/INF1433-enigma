@@ -4,19 +4,21 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" prefHeight="365.0" prefWidth="626.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane alignment="center" hgap="10" prefHeight="411.0" prefWidth="626.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
       <ColumnConstraints />
       <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
+      <ColumnConstraints maxWidth="194.0" minWidth="107.0" prefWidth="107.0" />
+      <ColumnConstraints maxWidth="185.0" minWidth="84.0" prefWidth="84.0" />
+      <ColumnConstraints maxWidth="169.0" minWidth="73.0" prefWidth="169.0" />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints />
@@ -32,29 +34,35 @@
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
    </rowConstraints>
    <children>
-      <Button mnemonicParsing="false" onAction="#configBtnClick" text="Configurer Rotors" GridPane.rowIndex="12" />
-      <Button mnemonicParsing="false" onAction="#encrypterBtnClick" text="Encrypter" GridPane.columnIndex="3" GridPane.rowIndex="12" />
-      <Button mnemonicParsing="false" onAction="#etapeSuivanteBtn" text="Étape suivante" GridPane.columnIndex="4" GridPane.rowIndex="12" />
-      <Button mnemonicParsing="false" onAction="#decrypterBtnClick" text="Décrypter" GridPane.columnIndex="5" GridPane.rowIndex="12" />
-      <TextArea fx:id="entreeTxt" prefHeight="0.0" prefWidth="199.0" GridPane.columnIndex="3" GridPane.rowIndex="10" />
-      <Label text="Réflecteur" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <Label text="Rotor 3" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-      <Label text="Rotor 2" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-      <Label text="Rotor 1" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-      <ComboBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+      <Button mnemonicParsing="false" onAction="#configBtnClick" text="Configurer Rotors" GridPane.rowIndex="13" />
+      <Button mnemonicParsing="false" onAction="#encrypterBtnClick" text="Encrypter" GridPane.columnIndex="2" GridPane.rowIndex="13" />
+      <Button mnemonicParsing="false" onAction="#etapeSuivanteBtn" prefHeight="25.0" prefWidth="107.0" text="Étape suivante" GridPane.columnIndex="4" GridPane.rowIndex="13" />
+      <Button mnemonicParsing="false" onAction="#decrypterBtnClick" text="Décrypter" GridPane.columnIndex="5" GridPane.rowIndex="13" />
+      <TextArea fx:id="entreeTxt" prefHeight="0.0" prefWidth="199.0" GridPane.columnIndex="4" GridPane.rowIndex="11" />
+      <Label text="Réflecteur" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+      <Label text="Rotor 3" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+      <Label text="Rotor 2" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+      <Label text="Rotor 1" GridPane.columnIndex="4" GridPane.rowIndex="4" />
       <Label text="Clé" GridPane.rowIndex="6" />
-      <ComboBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-      <ComboBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-      <CheckBox mnemonicParsing="false" text="Droite" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-      <CheckBox mnemonicParsing="false" text="Gauche" GridPane.columnIndex="5" GridPane.rowIndex="6" />
-      <CheckBox mnemonicParsing="false" text="Droite" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-      <CheckBox mnemonicParsing="false" text="Droite" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-      <CheckBox mnemonicParsing="false" text="Gauche" GridPane.columnIndex="5" GridPane.rowIndex="7" />
-      <CheckBox mnemonicParsing="false" text="Gauche" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+      <ComboBox fx:id="comboboxR3" prefWidth="150.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+      <ComboBox fx:id="comboboxR2" prefWidth="150.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+      <ComboBox fx:id="comboboxR1" prefWidth="150.0" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+      <RadioButton fx:id="droiteR3" mnemonicParsing="false" text="Droite" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+      <RadioButton fx:id="gaucheR3" mnemonicParsing="false" text="Gauche" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+      <RadioButton fx:id="droiteR2" mnemonicParsing="false" text="Droite" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+      <RadioButton fx:id="gaucheR2" mnemonicParsing="false" text="Gauche" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+      <RadioButton fx:id="droiteR1" mnemonicParsing="false" text="Droite" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+      <RadioButton fx:id="gaucheR1" mnemonicParsing="false" text="Gauche" GridPane.columnIndex="5" GridPane.rowIndex="8" />
       <Label prefHeight="17.0" prefWidth="64.0" text="R3" GridPane.columnIndex="2" GridPane.rowIndex="6" />
       <Label prefHeight="17.0" prefWidth="64.0" text="R2" GridPane.columnIndex="2" GridPane.rowIndex="7" />
       <Label prefHeight="17.0" prefWidth="64.0" text="R1" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+      <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="15" />
+      <Label prefHeight="37.0" prefWidth="208.0" text="Encrypter ou résultat décryption" GridPane.rowIndex="11" />
+      <Label prefHeight="37.0" prefWidth="208.0" text="Décrypter ou résultat encryption" GridPane.rowIndex="15" />
    </children>
 </GridPane>
