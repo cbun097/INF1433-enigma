@@ -10,4 +10,4 @@ Projet final dans le cardre du cours INF1433 - Engima
 ## Membres
 
 - Claire Bun
-- Jacob Jonhston
+- Jacob Johnston
