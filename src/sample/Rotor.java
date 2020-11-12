@@ -63,13 +63,35 @@ public class Rotor {
 
     public Integer PremierePasse(Integer Position)
     {
-        Position = (Position + this.passe1.get(Position)) % 26;
-        return Position;
+        return ((Position + this.passe1.get(Position)) % 26);
     }
 
     public Integer DeuxiemePasse(Integer Position)
     {
-        Position = (Position + this.passe2.get(Position)) % 26;
-        return Position;
+        return ((Position + this.passe2.get(Position)) % 26);
+    }
+
+    public List<Integer> getPasse1() {
+        return passe1;
+    }
+
+    public List<Integer> getPasse2() {
+        return passe2;
+    }
+
+    public Boolean getDirection() {
+        return Direction;
+    }
+
+    public Integer getDecalage() {
+        return Decalage;
+    }
+
+    public void setDecalage(Integer decalage) {
+        this.Decalage = decalage;
+    }
+
+    public void setDirection(Boolean direction) {
+        this.Direction = direction;
     }
 }
