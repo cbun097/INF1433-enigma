@@ -10,18 +10,10 @@ public class Rotor {
     private Integer Decalage;
     private Boolean Direction; //true = droite, false = gauche
 
-    public Rotor(List<Integer> passe1, List<Integer> passe2, Integer Decalage) {
+    public Rotor(List<Integer> passe1, List<Integer> passe2) {
         this.passe1 = passe1;
         this.passe2 = passe2;
-        if(Decalage > 0) {
-            this.Decalage = Decalage;
-            Direction = true; //fait un decalage a la droite
-        }
-        else
-        {
-            this.Decalage = 0 - Decalage; //met la valeur positive
-            Direction = false; //fait un decalage a la gauche
-        }
+
     }
 
     public void rotation(){
@@ -88,7 +80,15 @@ public class Rotor {
     }
 
     public void setDecalage(Integer decalage) {
-        this.Decalage = decalage;
+        if(decalage > 0) {
+            this.Decalage = decalage;
+            Direction = true; //fait un decalage a la droite
+        }
+        else
+        {
+            this.Decalage = 0 - decalage; //met la valeur positive
+            Direction = false; //fait un decalage a la gauche
+        }
     }
 
     public void setDirection(Boolean direction) {
