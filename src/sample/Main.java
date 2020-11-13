@@ -23,8 +23,9 @@ public class Main extends Application {
                 Arrays.asList(12,-1,23,10,2,14,5,-5,9,-2,-13,10,-2,-8,10,-6,6,-16,2,-1,-17,-5,-14,-9,-20,-10));
         reflecteur = new Reflecteur(Arrays.asList(25,23,21,19,17,15,13,11,9,7,5,3,1,-1,-3,-5,-7,-9,-11,-13,-15,-17,-19,-21,-23,-25));
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Scene scene = new Scene(root, 850, 675);
         primaryStage.setTitle("Enigma");
-        primaryStage.setScene(new Scene(root, 650, 475));
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
