@@ -13,7 +13,6 @@ public class Rotor {
     public Rotor(List<Integer> passe1, List<Integer> passe2) {
         this.passe1 = passe1;
         this.passe2 = passe2;
-
     }
 
     public void rotation(){
