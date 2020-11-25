@@ -20,13 +20,13 @@ public class Controller {
     @FXML
     ComboBox<String> comboboxR3, comboboxR2, comboboxR1;
     @FXML
-    private FlowPane labelContainer, alphabetContainer, reflecteurContainer, rotor1Container, rotor2Container, rotor3Container;
+    private FlowPane alphabetContainer, reflecteurContainer, rotor1ContainerP1, rotor1ContainerP2, rotor2Container, rotor3Container;
 
     private Rotor rotor1;
     private Rotor rotor2;
     private Rotor rotor3;
     private Reflecteur reflecteur;
-    private List<Label> labels, alphabetLabels, reflecteurLabels, rotor1Labels, rotor2Labels, rotor3Labels;
+    private List<Label> alphabetLabels, reflecteurLabels, rotor1P1Labels, rotor1P2Labels, rotor2Labels, rotor3Labels;
 
     String rotorDroite[]= {"+1", "+2", "+3", "+4", "+5", "+6", "+7", "+8","+9", "+10", "+11", "+12", "+13", "+14", "+15", "+16", "+17", "+18", "+19", "+20", "+21", "+22", "+23", "+24", "+25", "+26"};
     String rotorGauche[]= {"-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8","-9", "-10", "-11", "-12", "-13", "-14", "-15", "-16", "-17", "-18", "-19", "-20", "-21", "-22", "-23", "-24", "-25", "-26"};
@@ -132,14 +132,22 @@ public class Controller {
         }
 
         // Initialiser et affiche la liste du rotor 1
-        // TODO ajouter passe2
-        rotor1Labels = new ArrayList<>();
+        rotor1P1Labels = new ArrayList<>();
         for(Integer rotorElement: rotor1.getPasse1()) {
             Label label = new Label(Integer.toString(rotorElement));
             label.setPadding(new Insets(0,5,0,5));
             // ajouter le style
-            rotor1Labels.add(label);
-            rotor1Container.getChildren().add(label);
+            rotor1P1Labels.add(label);
+            rotor1ContainerP1.getChildren().add(label);
+        }
+
+        rotor1P2Labels = new ArrayList<>();
+        for(Integer rotorElement: rotor1.getPasse2()) {
+            Label label = new Label(Integer.toString(rotorElement));
+            label.setPadding(new Insets(0,5,0,5));
+            // ajouter le style
+            rotor1P2Labels.add(label);
+            rotor1ContainerP2.getChildren().add(label);
         }
 
         // Initialiser et affiche la liste du rotor 2
