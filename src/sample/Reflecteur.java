@@ -3,7 +3,7 @@ package sample;
 import java.util.List;
 
 public class Reflecteur {
-    private List<Integer> Reflecteur;
+    private final List<Integer> Reflecteur;
     public Reflecteur(List<Integer> Reflecteur)
     {
         this.Reflecteur = Reflecteur;

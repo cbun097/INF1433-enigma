@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Rotor {
-    private List<Integer> passe1;
-    private List<Integer> passe2;
+    private final List<Integer> passe1;
+    private final List<Integer> passe2;
     private Integer Decalage;
     private Boolean Direction; //true = droite, false = gauche
 
