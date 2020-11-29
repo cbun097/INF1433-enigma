@@ -17,9 +17,9 @@ public class Controller {
     @FXML
     ComboBox<String> combobox1, combobox2, combobox3;
     @FXML
-    TextField txtField1, txtField2, txtField3;
+    TextField txtDecalage3, txtDecalage2, txtDecalage1;
     @FXML
-    TextArea entreeEncryptionTxt1;
+    TextArea txtEncrypter, txtDecrypter;
     @FXML
     private FlowPane alphabetContainer, reflecteurContainer, rotor1ContainerP1, rotor1ContainerP2, rotor2ContainerP1, rotor2ContainerP2, rotor3ContainerP1, rotor3ContainerP2;
     ToggleGroup rotor1radioGroup, rotor2radioGroup, rotor3radioGroup;
@@ -75,79 +75,23 @@ public class Controller {
         }
 
         // Initialiser et affiche la liste des reflecteurs
-        reflecteurLabels = new ArrayList<>();
-        for(Integer reflecteurElement: reflecteur.getReflecteur()) {
-            Label label = new Label(Integer.toString(reflecteurElement));
-            label.setPadding(new Insets(0,5,0,5));
-            label.setStyle("-fx-border-color: black;");
-            reflecteurLabels.add(label);
-            reflecteurContainer.getChildren().add(label);
-        }
+        updateRotor();
 
-        // Initialiser et affiche la liste du rotor 1
-        rotor1P1Labels = new ArrayList<>();
-        for(Integer rotorElement: rotor1.getPasse1()) {
-            Label label = new Label(Integer.toString(rotorElement));
-            label.setPadding(new Insets(0,5,0,5));
-            label.setStyle("-fx-border-color: black;");
-            rotor1P1Labels.add(label);
-            rotor1ContainerP1.getChildren().add(label);
-        }
-
-        rotor1P2Labels = new ArrayList<>();
-        for(Integer rotorElement: rotor1.getPasse2()) {
-            Label label = new Label(Integer.toString(rotorElement));
-            label.setPadding(new Insets(0,5,0,5));
-            label.setStyle("-fx-border-color: black;");
-            rotor1P2Labels.add(label);
-            rotor1ContainerP2.getChildren().add(label);
-        }
-
-        // Initialiser et affiche la liste du rotor 2
-        rotor2P1Labels = new ArrayList<>();
-        for(Integer rotorElement: rotor2.getPasse1()) {
-            Label label = new Label(Integer.toString(rotorElement));
-            label.setPadding(new Insets(0,5,0,5));
-            label.setStyle("-fx-border-color: black;");
-            rotor2P1Labels.add(label);
-            rotor2ContainerP1.getChildren().add(label);
-        }
-
-        rotor2P2Labels = new ArrayList<>();
-        for(Integer rotorElement: rotor2.getPasse2()) {
-            Label label = new Label(Integer.toString(rotorElement));
-            label.setPadding(new Insets(0,5,0,5));
-            label.setStyle("-fx-border-color: black;");
-            rotor2P2Labels.add(label);
-            rotor2ContainerP2.getChildren().add(label);
-        }
-
-        // Initialiser et affiche la liste du rotor 3
-        rotor3P1Labels = new ArrayList<>();
-        for(Integer rotorElement: rotor3.getPasse1()) {
-            Label label = new Label(Integer.toString(rotorElement));
-            label.setPadding(new Insets(0,5,0,5));
-            label.setStyle("-fx-border-color: black;");
-            rotor3P1Labels.add(label);
-            rotor3ContainerP1.getChildren().add(label);
-        }
-
-        rotor3P2Labels = new ArrayList<>();
-        for(Integer rotorElement: rotor3.getPasse2()) {
-            Label label = new Label(Integer.toString(rotorElement));
-            label.setPadding(new Insets(0,5,0,5));
-            label.setStyle("-fx-border-color: black;");
-            rotor3P2Labels.add(label);
-            rotor3ContainerP2.getChildren().add(label);
-        }
+        //test pour encrypter
+        rotor1.setDirection(true);
+        rotor2.setDirection(false);
+        rotor3.setDirection(true);
+        rotor1.setDecalage(1);
+        rotor2.setDecalage(2);
+        rotor3.setDecalage(3);
     }
 
     @FXML
     public void configBtnClick() {
         // vérifier que tous les clés pour les rotors ont été configuré -> erreur
-        String txt1Value = txtField1.getText();
-        String txt2Value = txtField2.getText();
-        String txt3Value = txtField3.getText();
+        String txt1Value = txtDecalage1.getText();
+        String txt2Value = txtDecalage2.getText();
+        String txt3Value = txtDecalage3.getText();
 
         // combo box get the value
        String cb1Value = combobox1.getValue();
@@ -174,22 +118,129 @@ public class Controller {
 
     @FXML
     public void encrypterBtnClick() {
-        String entreeUtilisateur = entreeEncryptionTxt1.getText();
+        String Sorti = "";
+        System.out.println("entree utilisateur" + txtEncrypter.getText());
+        for (char ch: txtEncrypter.getText().toCharArray()) {
+            Sorti += EncrypterUneLettre(ch).toString();
+        }
+        txtDecrypter.setText(Sorti);
         System.out.println("encryper btn is clicked");
-        System.out.println("entree utilisateur" + entreeUtilisateur);
     }
 
     @FXML
     public void etapeSuivanteBtn() {
+        Character sorti = EncrypterUneLettre(txtEncrypter.getText().toCharArray()[0]);
         // afficher la nouvelle config
         // encrypter
         System.out.println("etape suivante btn is clicked");
         // set la lettre apres avoir ete encrypte
-        entreeEncryptionTxt1.setText("");
+        txtDecrypter.appendText(sorti.toString());
     }
 
     @FXML
     public void decrypterBtnClick() {
         System.out.println("decryper btn is clicked");
+    }
+
+    public void updateRotor()
+    {
+        reflecteurLabels = new ArrayList<>();
+        reflecteurContainer.getChildren().clear();
+        for(Integer reflecteurElement: reflecteur.getReflecteur()) {
+            Label label = new Label(Integer.toString(reflecteurElement));
+            label.setPadding(new Insets(0,5,0,5));
+            label.setStyle("-fx-border-color: black;");
+            reflecteurLabels.add(label);
+            reflecteurContainer.getChildren().add(label);
+        }
+
+        // Initialiser et affiche la liste du rotor 1
+        rotor1P1Labels = new ArrayList<>();
+        rotor1ContainerP1.getChildren().clear();
+        for(Integer rotorElement: rotor1.getPasse1()) {
+            Label label = new Label(Integer.toString(rotorElement));
+            label.setPadding(new Insets(0,5,0,5));
+            label.setStyle("-fx-border-color: black;");
+            rotor1P1Labels.add(label);
+            rotor1ContainerP1.getChildren().add(label);
+        }
+
+        rotor1P2Labels = new ArrayList<>();
+        rotor1ContainerP2.getChildren().clear();
+        for(Integer rotorElement: rotor1.getPasse2()) {
+            Label label = new Label(Integer.toString(rotorElement));
+            label.setPadding(new Insets(0,5,0,5));
+            label.setStyle("-fx-border-color: black;");
+            rotor1P2Labels.add(label);
+            rotor1ContainerP2.getChildren().add(label);
+        }
+
+        // Initialiser et affiche la liste du rotor 2
+        rotor2P1Labels = new ArrayList<>();
+        rotor2ContainerP1.getChildren().clear();
+        for(Integer rotorElement: rotor2.getPasse1()) {
+            Label label = new Label(Integer.toString(rotorElement));
+            label.setPadding(new Insets(0,5,0,5));
+            label.setStyle("-fx-border-color: black;");
+            rotor2P1Labels.add(label);
+            rotor2ContainerP1.getChildren().add(label);
+        }
+
+        rotor2P2Labels = new ArrayList<>();
+        rotor2ContainerP2.getChildren().clear();
+        for(Integer rotorElement: rotor2.getPasse2()) {
+            Label label = new Label(Integer.toString(rotorElement));
+            label.setPadding(new Insets(0,5,0,5));
+            label.setStyle("-fx-border-color: black;");
+            rotor2P2Labels.add(label);
+            rotor2ContainerP2.getChildren().add(label);
+        }
+
+        // Initialiser et affiche la liste du rotor 3
+        rotor3P1Labels = new ArrayList<>();
+        rotor3ContainerP1.getChildren().clear();
+        for(Integer rotorElement: rotor3.getPasse1()) {
+            Label label = new Label(Integer.toString(rotorElement));
+            label.setPadding(new Insets(0,5,0,5));
+            label.setStyle("-fx-border-color: black;");
+            rotor3P1Labels.add(label);
+            rotor3ContainerP1.getChildren().add(label);
+        }
+
+        rotor3P2Labels = new ArrayList<>();
+        rotor3ContainerP2.getChildren().clear();
+        for(Integer rotorElement: rotor3.getPasse2()) {
+            Label label = new Label(Integer.toString(rotorElement));
+            label.setPadding(new Insets(0,5,0,5));
+            label.setStyle("-fx-border-color: black;");
+            rotor3P2Labels.add(label);
+            rotor3ContainerP2.getChildren().add(label);
+        }
+    }
+
+    public Character EncrypterUneLettre(Character lettre)
+    {
+        int entree = 0;
+        System.out.println(lettre.toString().toUpperCase());
+        for(int i = 0; i < alphabetArray.length; i++)
+        {
+            if(alphabetArray[i].equals(lettre.toString().toUpperCase()))
+            {
+                entree = i;
+                break;
+            }
+        }
+        entree = rotor1.PremierePasse(entree);
+        entree = rotor2.PremierePasse(entree);
+        entree = rotor3.PremierePasse(entree);
+        entree = reflecteur.Reflection(entree);
+        entree = rotor3.DeuxiemePasse(entree);
+        entree = rotor2.DeuxiemePasse(entree);
+        entree = rotor1.DeuxiemePasse(entree);
+        rotor1.rotation();
+        rotor2.rotation();
+        rotor3.rotation();
+        updateRotor();
+        return alphabetArray[entree].toCharArray()[0];
     }
 }

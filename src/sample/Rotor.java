@@ -54,12 +54,14 @@ public class Rotor {
 
     public Integer PremierePasse(Integer Position)
     {
-        return ((Position + this.passe1.get(Position)) % 26);
+        System.out.println(Position + " + " + this.passe1.get(Position) + " = " + ((Position + this.passe1.get(Position) + 26) % 26));
+        return ((Position + this.passe1.get(Position) + 26) % 26);
     }
 
     public Integer DeuxiemePasse(Integer Position)
     {
-        return ((Position + this.passe2.get(Position)) % 26);
+        System.out.println(Position + " + " + this.passe2.get(Position) + " = " + ((Position + this.passe2.get(Position) + 26) % 26));
+        return ((Position + this.passe2.get(Position) + 26) % 26);
     }
 
     public List<Integer> getPasse1() {
@@ -79,15 +81,7 @@ public class Rotor {
     }
 
     public void setDecalage(Integer decalage) {
-        if(decalage > 0) {
-            this.Decalage = decalage;
-            Direction = true; //fait un decalage a la droite
-        }
-        else
-        {
-            this.Decalage = 0 - decalage; //met la valeur positive
-            Direction = false; //fait un decalage a la gauche
-        }
+        this.Decalage = decalage;
     }
 
     public void setDirection(Boolean direction) {

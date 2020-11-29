@@ -11,6 +11,7 @@ public class Reflecteur {
 
     public Integer Reflection(Integer Position)
     {
+        System.out.println(Position + " + " + this.Reflecteur.get(Position) + " = " + ((Position + this.Reflecteur.get(Position)) % 26));
         return ((Position + this.Reflecteur.get(Position)) % 26);
     }
 
