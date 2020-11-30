@@ -77,21 +77,15 @@ public class Controller {
         // Initialiser et affiche la liste des reflecteurs
         updateRotor();
 
-        //test pour encrypter
-        rotor1.setDirection(true);
-        rotor2.setDirection(false);
-        rotor3.setDirection(true);
-        rotor1.setDecalage(1);
-        rotor2.setDecalage(2);
-        rotor3.setDecalage(3);
+
     }
 
     @FXML
     public void configBtnClick() {
         // vérifier que tous les clés pour les rotors ont été configuré -> erreur
-        String txt1Value = txtDecalage1.getText();
-        String txt2Value = txtDecalage2.getText();
-        String txt3Value = txtDecalage3.getText();
+        int txt1Value = Integer.parseInt(txtDecalage1.getText());
+        int txt2Value = Integer.parseInt(txtDecalage2.getText());
+        int txt3Value = Integer.parseInt(txtDecalage3.getText());
 
         // combo box get the value
        String cb1Value = combobox1.getValue();
@@ -99,27 +93,36 @@ public class Controller {
        String cb3Value = combobox3.getValue();
 
         // radio button group
-        String radio1Value = ((RadioButton)rotor1radioGroup.getSelectedToggle()).getText();
-        String radio2Value = ((RadioButton)rotor2radioGroup.getSelectedToggle()).getText();
-        String radio3Value = ((RadioButton)rotor3radioGroup.getSelectedToggle()).getText();
+        Boolean radio1Value = convertDroiteGauche(((RadioButton)rotor1radioGroup.getSelectedToggle()).getText());
+        Boolean radio2Value = convertDroiteGauche(((RadioButton)rotor2radioGroup.getSelectedToggle()).getText());
+        Boolean radio3Value = convertDroiteGauche(((RadioButton)rotor3radioGroup.getSelectedToggle()).getText());
 
         System.out.println(String.format("Entree de l'utilisateur: %s - %s - %s - %s - %s - %s -%s - %s - %s",
                 cb1Value, cb2Value, cb3Value, radio1Value, radio2Value, radio3Value, txt1Value, txt2Value, txt3Value));
 
         // decalage method
+        //test pour encrypter
+        rotor1.setDirection(radio1Value);
+        rotor2.setDirection(radio2Value);
+        rotor3.setDirection(radio3Value);
+        rotor1.setDecalage(txt1Value);
+        rotor2.setDecalage(txt2Value);
+        rotor3.setDecalage(txt3Value);
 
-        affichierNouvelleConfig();
-
+        updateRotor();
     }
 
-    public void affichierNouvelleConfig() {
-
+    private Boolean convertDroiteGauche(String value) {
+        if(value.equals("Gauche"))
+            return false;
+        else
+            return true;
     }
 
     @FXML
     public void encrypterBtnClick() {
         String Sorti = "";
-        System.out.println("entree utilisateur" + txtEncrypter.getText());
+        System.out.println("entree utilisateur " + txtEncrypter.getText());
         for (char ch: txtEncrypter.getText().toCharArray()) {
             Sorti += EncrypterUneLettre(ch).toString();
         }
