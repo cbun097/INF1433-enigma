@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -78,8 +79,6 @@ public class Controller {
 
         // Initialiser et affiche la liste des reflecteurs
         updateRotor();
-
-
     }
 
     @FXML
@@ -99,6 +98,8 @@ public class Controller {
         Boolean radio2Value = convertDroiteGauche(((RadioButton)rotor2radioGroup.getSelectedToggle()).getText());
         Boolean radio3Value = convertDroiteGauche(((RadioButton)rotor3radioGroup.getSelectedToggle()).getText());
 
+        prendreOrdreRotor(cb1Value, cb2Value, cb3Value);
+
         System.out.println(String.format("Entree de l'utilisateur: %s - %s - %s - %s - %s - %s -%s - %s - %s",
                 cb1Value, cb2Value, cb3Value, radio1Value, radio2Value, radio3Value, txt1Value, txt2Value, txt3Value));
 
@@ -112,6 +113,10 @@ public class Controller {
         rotor3.setDecalage(txt3Value);
 
         updateRotor();
+    }
+
+    private void prendreOrdreRotor(String selectedRotor1, String selectedRotor2, String selectedRotor3) {
+        System.out.println("Ordre rotor: "  + selectedRotor1 + selectedRotor2 + selectedRotor3);
     }
 
     private Boolean convertDroiteGauche(String value) {
@@ -228,7 +233,7 @@ public class Controller {
     {
         int entree = 0;
         String entreeUtilisateur = lettre.toString().toUpperCase();
-        System.out.println(entreeUtilisateur);
+        updateCouleur(alphabetLabels, lettre, true);
         for(int i = 0; i < alphabetArray.length; i++)
         {
             if(alphabetArray[i].equals(entreeUtilisateur))
@@ -244,29 +249,55 @@ public class Controller {
         entree = rotor3.DeuxiemePasse(entree);
         entree = rotor2.DeuxiemePasse(entree);
         entree = rotor1.DeuxiemePasse(entree);
-        System.out.println("Sortie encrytion index " + entree);
         rotor1.rotation();
         rotor2.rotation();
         rotor3.rotation();
         updateRotor();
 
-        System.out.println("Sortie encryption " + alphabetArray[entree].toCharArray()[0]);
-        updateCouleur(labelAlphabel, alphabetArray[entree].toCharArray()[0]);
-        return alphabetArray[entree].toCharArray()[0];
+        Character sortie = alphabetArray[entree].toCharArray()[0];
+        updateCouleur(alphabetLabels, sortie, false);
+        updateCouleurRotors(rotor1P1Labels ,rotor1.PremierePasse(entree), true);
+        updateCouleurRotors(rotor1P2Labels ,rotor1.DeuxiemePasse(entree), false);
+        updateCouleurRotors(rotor2P1Labels ,rotor2.PremierePasse(entree), true);
+        updateCouleurRotors(rotor2P2Labels ,rotor2.DeuxiemePasse(entree), false);
+        updateCouleurRotors(rotor3P1Labels ,rotor3.PremierePasse(entree), true);
+        updateCouleurRotors(rotor3P2Labels ,rotor3.DeuxiemePasse(entree), false);
+        // prendre l'oppose du reflecteur
+        updateCouleurRotors(reflecteurLabels ,reflecteur.Reflection(entree), true);
+        updateCouleurRotors(reflecteurLabels ,reflecteur.Reflection(entree), false);
+
+        return sortie;
     }
 
-    private void updateCouleur(Label labelToUpdate, char item){
-
-        // rouge
-        //labelToUpdate.setTextFill(Color.web("#CC0000"));
-        // blue color to label
-        System.out.println("item char " + item);
-        for(String al: alphabetArray){
-            if(al.equals(item)){
-                labelToUpdate.setTextFill(Color.web("#0000FF"));
-                labelToUpdate.setStyle("-fx-font-weight: bold");
+    // Methode qui permet de changer la couleur selon l'entree/sortie de la lettre
+    private void updateCouleur(List<Label> labelsList, Character lettre, Boolean entree) {
+        for (Label labelToUpdate : labelsList) {
+            if (lettre.equals(labelToUpdate.getText().toCharArray()[0])) {
+                if(entree){
+                    labelToUpdate.setTextFill(Color.web("#CC0000"));
+                    labelToUpdate.setStyle("-fx-border-color: black;-fx-font-weight: bold;");
+                }
+                else{
+                    labelToUpdate.setTextFill(Color.web("#0000FF"));
+                    labelToUpdate.setStyle("-fx-border-color: black;-fx-font-weight: bold");
+                }
             }
-            labelToUpdate.setTextFill(Color.web("#CC0000"));
+        }
+    }
+
+    // Methode qui permet de changer la couleur des label selon l'entree/sortie du rotor
+    private void updateCouleurRotors(List<Label> labelsList, int rotorPosition, Boolean entree) {
+        for (Label labelToUpdate : labelsList) {
+            if(labelsList.indexOf(labelToUpdate) == rotorPosition) {
+                if(entree){
+                    labelToUpdate.setTextFill(Color.web("#CC0000"));
+                    labelToUpdate.setStyle("-fx-border-color: black;-fx-font-weight: bold;");
+                }
+                else{
+                    labelToUpdate.setTextFill(Color.web("#0000FF"));
+                    labelToUpdate.setStyle("-fx-border-color: black;-fx-font-weight: bold");
+                }
+            }
         }
     }
 }
