@@ -8,7 +8,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +27,7 @@ public class Controller {
     private Rotor rotor1, rotor2, rotor3;
     private Reflecteur reflecteur;
     private List<Label> alphabetLabels, reflecteurLabels, rotor1P1Labels, rotor1P2Labels, rotor2P1Labels, rotor2P2Labels, rotor3P1Labels, rotor3P2Labels;
-    Label labelAlphabel, labelR1P1;
+    Label labelAlphabel;
 
     String[] rotorDroite = {"+1", "+2", "+3", "+4", "+5", "+6", "+7", "+8","+9", "+10", "+11", "+12", "+13", "+14", "+15", "+16", "+17", "+18", "+19", "+20", "+21", "+22", "+23", "+24", "+25", "+26"};
     String[] rotorGauche = {"-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8","-9", "-10", "-11", "-12", "-13", "-14", "-15", "-16", "-17", "-18", "-19", "-20", "-21", "-22", "-23", "-24", "-25", "-26"};
@@ -168,12 +167,11 @@ public class Controller {
         rotor1P1Labels = new ArrayList<>();
         rotor1ContainerP1.getChildren().clear();
         for(Integer rotorElement: rotor1.getPasse1()) {
-            labelR1P1 = new Label(Integer.toString(rotorElement));
-            labelR1P1.setPadding(new Insets(0,5,0,5));
-            labelR1P1.setStyle("-fx-border-color: black;");
-
-            rotor1P1Labels.add(labelR1P1);
-            rotor1ContainerP1.getChildren().add(labelR1P1);
+            Label label = new Label(Integer.toString(rotorElement));
+            label.setPadding(new Insets(0,5,0,5));
+            label.setStyle("-fx-border-color: black;");
+            rotor1P1Labels.add(label);
+            rotor1ContainerP1.getChildren().add(label);
         }
 
         rotor1P2Labels = new ArrayList<>();
@@ -210,6 +208,7 @@ public class Controller {
         // Initialiser et affiche la liste du rotor 3
         rotor3P1Labels = new ArrayList<>();
         rotor3ContainerP1.getChildren().clear();
+        //creerLabelPasse1(rotor3, rotor3P2Labels, rotor3ContainerP2);
         for(Integer rotorElement: rotor3.getPasse1()) {
             Label label = new Label(Integer.toString(rotorElement));
             label.setPadding(new Insets(0,5,0,5));
@@ -220,6 +219,7 @@ public class Controller {
 
         rotor3P2Labels = new ArrayList<>();
         rotor3ContainerP2.getChildren().clear();
+        //creerLabelPasse2(rotor3, rotor3P2Labels, rotor3ContainerP2);
         for(Integer rotorElement: rotor3.getPasse2()) {
             Label label = new Label(Integer.toString(rotorElement));
             label.setPadding(new Insets(0,5,0,5));
@@ -228,6 +228,27 @@ public class Controller {
             rotor3ContainerP2.getChildren().add(label);
         }
     }
+
+    // En commentaire pour creer des methodes generic pour creer les labels - doesn't work
+//    void creerLabelPasse1(Rotor rotor, List<Label> labelList, FlowPane flowPane){
+//        for(Integer rotorElement: rotor.getPasse1()) {
+//            Label label = new Label(Integer.toString(rotorElement));
+//            label.setPadding(new Insets(0,5,0,5));
+//            label.setStyle("-fx-border-color: black;");
+//            labelList.add(label);
+//            flowPane.getChildren().add(label);
+//        }
+//    }
+//
+//    private void creerLabelPasse2(Rotor rotor, List<Label> labelList, FlowPane flowPane){
+//        for(Integer rotorElement: rotor.getPasse2()) {
+//            Label label = new Label(Integer.toString(rotorElement));
+//            label.setPadding(new Insets(0,5,0,5));
+//            label.setStyle("-fx-border-color: black;");
+//            labelList.add(label);
+//            flowPane.getChildren().add(label);
+//        }
+//    }
 
     public Character EncrypterUneLettre(Character lettre)
     {
@@ -266,7 +287,22 @@ public class Controller {
         updateCouleurRotors(reflecteurLabels ,reflecteur.Reflection(entree), true);
         updateCouleurRotors(reflecteurLabels ,reflecteur.Reflection(entree), false);
 
+        //testing
+        getOppositeRelecteur(reflecteur.Reflection(entree));
         return sortie;
+    }
+
+    // get the position of the opposite value
+    private int getOppositeRelecteur(int position) {
+        int positionOpposite = 0;
+        // get value of the position
+        for(int element: reflecteur.getReflecteur()) {
+            if(reflecteur.getReflecteur().indexOf(element) == position) {
+                int outputValue = reflecteur.getReflecteur().get(position);
+            }
+        }
+
+        return positionOpposite;
     }
 
     // Methode qui permet de changer la couleur selon l'entree/sortie de la lettre
