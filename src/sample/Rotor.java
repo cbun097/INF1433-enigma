@@ -52,13 +52,13 @@ public class Rotor {
 
     public Integer PremierePasse(Integer Position)
     {
-        System.out.println(Position + " + " + this.passe1.get(Position) + " = " + ((Position + this.passe1.get(Position) + 26) % 26));
+        System.out.println("Premiere " + Position + " + " + this.passe1.get(Position) + " = " + ((Position + this.passe1.get(Position) + 26) % 26));
         return ((Position + this.passe1.get(Position) + 26) % 26);
     }
 
     public Integer DeuxiemePasse(Integer Position)
     {
-        System.out.println(Position + " + " + this.passe2.get(Position) + " = " + ((Position + this.passe2.get(Position) + 26) % 26));
+        System.out.println("DieuxiemePasse " + Position + " + " + this.passe2.get(Position) + " = " + ((Position + this.passe2.get(Position) + 26) % 26));
         return ((Position + this.passe2.get(Position) + 26) % 26);
     }
 
