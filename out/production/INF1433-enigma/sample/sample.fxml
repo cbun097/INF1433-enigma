@@ -15,14 +15,14 @@
 <AnchorPane prefHeight="606.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
          <children>
             <Label layoutX="706.0" layoutY="14.0" text="Réflecteur" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <TextArea fx:id="entreeTxt" layoutX="289.0" layoutY="526.0" prefHeight="38.0" prefWidth="489.0" GridPane.columnIndex="4" GridPane.rowIndex="12" />
+            <TextArea fx:id="txtDecrypter" layoutX="289.0" layoutY="526.0" prefHeight="38.0" prefWidth="489.0" GridPane.columnIndex="4" GridPane.rowIndex="12" />
             <Label layoutX="713.0" layoutY="117.0" text="Rotor 2" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-            <Label layoutX="713.0" layoutY="64.0" text="Rotor 1" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <Label layoutX="713.0" layoutY="64.0" text="Rotor 3" GridPane.columnIndex="4" GridPane.rowIndex="4" />
             <Label layoutX="27.0" layoutY="320.0" text="Clé" GridPane.rowIndex="7" />
       <Label layoutX="582.0" layoutY="307.0" text="Décalage" />
-            <TextField fx:id="txtField3" layoutX="639.0" layoutY="380.0" />
-            <TextField fx:id="txtField2" layoutX="639.0" layoutY="347.0" />
-            <TextField fx:id="txtField1" layoutX="639.0" layoutY="303.0" />
+            <TextField fx:id="txtDecalage3" layoutX="639.0" layoutY="380.0" />
+            <TextField fx:id="txtDecalage2" layoutX="639.0" layoutY="347.0" />
+            <TextField fx:id="txtDecalage1" layoutX="639.0" layoutY="303.0" />
             <RadioButton fx:id="droiteR3" layoutX="432.0" layoutY="381.0" mnemonicParsing="false" text="Droite" />
             <RadioButton fx:id="gaucheR3" layoutX="508.0" layoutY="381.0" mnemonicParsing="false" text="Gauche" />
             <RadioButton fx:id="gaucheR2" layoutX="508.0" layoutY="348.0" mnemonicParsing="false" text="Gauche" />
@@ -36,9 +36,9 @@
               <Button layoutX="201.0" layoutY="473.0" mnemonicParsing="false" onAction="#configBtnClick" text="Configurer Rotors" />
               <Button layoutX="462.0" layoutY="473.0" mnemonicParsing="false" onAction="#etapeSuivanteBtn" prefHeight="25.0" prefWidth="107.0" text="Étape suivante" />
               <Button layoutX="590.0" layoutY="473.0" mnemonicParsing="false" onAction="#decrypterBtnClick" text="Décrypter" />
-            <Label layoutX="713.0" layoutY="179.0" text="Rotor 3" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Label layoutX="713.0" layoutY="179.0" text="Rotor 1" GridPane.columnIndex="4" GridPane.rowIndex="2" />
             <Label layoutX="91.0" layoutY="378.0" prefHeight="17.0" prefWidth="181.0" text="Selectionner le troisième rotor" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-      <TextArea fx:id="entreeEncryptionTxt1" layoutX="295.0" layoutY="422.0" prefHeight="38.0" prefWidth="489.0" />
+      <TextArea fx:id="txtEncrypter" layoutX="295.0" layoutY="422.0" prefHeight="38.0" prefWidth="489.0" />
       <ComboBox fx:id="combobox1" layoutX="269.0" layoutY="303.0" prefWidth="150.0" />
       <ComboBox fx:id="combobox2" layoutX="269.0" layoutY="341.0" prefWidth="150.0" />
       <ComboBox fx:id="combobox3" layoutX="269.0" layoutY="374.0" prefWidth="150.0" />
@@ -50,14 +50,14 @@
       </HBox>
       <VBox layoutX="44.0" layoutY="119.0" prefHeight="38.0" prefWidth="655.0">
          <children>
-             <FlowPane fx:id="rotor2ContainerP1" prefHeight="37.0" prefWidth="645.0" />
              <FlowPane fx:id="rotor2ContainerP2" prefHeight="37.0" prefWidth="645.0" />
+             <FlowPane fx:id="rotor2ContainerP1" prefHeight="37.0" prefWidth="645.0" />
          </children>
       </VBox>
       <VBox layoutX="44.0" layoutY="177.0" prefHeight="38.0" prefWidth="666.0">
          <children>
-             <FlowPane fx:id="rotor3ContainerP1" prefHeight="38.0" prefWidth="611.0" />
-             <FlowPane fx:id="rotor3ContainerP2" prefHeight="38.0" prefWidth="440.0" />
+             <FlowPane fx:id="rotor1ContainerP2" prefHeight="38.0" prefWidth="611.0" />
+             <FlowPane fx:id="rotor1ContainerP1" prefHeight="38.0" prefWidth="440.0" />
          </children>
       </VBox>
       <HBox layoutX="44.0" layoutY="11.0" prefHeight="38.0" prefWidth="655.0">
@@ -67,8 +67,8 @@
       </HBox>
       <VBox layoutX="44.0" layoutY="54.0" prefHeight="38.0" prefWidth="666.0">
          <children>
-             <FlowPane fx:id="rotor1ContainerP1" prefHeight="25.0" prefWidth="611.0" />
-            <FlowPane fx:id="rotor1ContainerP2" prefHeight="31.0" prefWidth="440.0" />
+             <FlowPane fx:id="rotor3ContainerP2" prefHeight="25.0" prefWidth="611.0" />
+            <FlowPane fx:id="rotor3ContainerP1" prefHeight="31.0" prefWidth="440.0" />
          </children>
       </VBox>
       <Label layoutX="582.0" layoutY="351.0" text="Décalage" />

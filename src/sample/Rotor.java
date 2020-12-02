@@ -3,8 +3,8 @@ package sample;
 import java.util.List;
 
 public class Rotor {
-    private final List<Integer> passe1;
-    private final List<Integer> passe2;
+    private List<Integer> passe1;
+    private List<Integer> passe2;
     private Integer Decalage;
     private Boolean Direction; //true = droite, false = gauche
 
@@ -76,6 +76,12 @@ public class Rotor {
 
     public Integer getDecalage() {
         return Decalage;
+    }
+
+    public void setRotor(List<Integer> passe1, List<Integer> passe2)
+    {
+        this.passe1 = passe1;
+        this.passe2 = passe2;
     }
 
     public void setDecalage(Integer decalage) {
