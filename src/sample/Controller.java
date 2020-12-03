@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +28,8 @@ public class Controller {
     private Rotor rotor1, rotor2, rotor3;
     private Reflecteur reflecteur;
     private List<Label> alphabetLabels, reflecteurLabels, rotor1P1Labels, rotor1P2Labels, rotor2P1Labels, rotor2P2Labels, rotor3P1Labels, rotor3P2Labels;
-    Label labelAlphabel;
+    @FXML
+    Label labelAlphabel, lblRotor1, lblRotor2, lblRotor3;
 
     String[] rotorDroite = {"+1", "+2", "+3", "+4", "+5", "+6", "+7", "+8","+9", "+10", "+11", "+12", "+13", "+14", "+15", "+16", "+17", "+18", "+19", "+20", "+21", "+22", "+23", "+24", "+25", "+26"};
     String[] rotorGauche = {"-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8","-9", "-10", "-11", "-12", "-13", "-14", "-15", "-16", "-17", "-18", "-19", "-20", "-21", "-22", "-23", "-24", "-25", "-26"};
@@ -40,12 +42,20 @@ public class Controller {
         ObservableList obstListCmb = FXCollections.observableArrayList(comboboxChoicesArray);
 
         rotor1 = new Rotor(Arrays.asList(10,21,5,-17,21,-4,12,16,6,-3,7,-7,4,2,5,-6,-11,-17,-9,-6,-9,-19,2,-3,-21,-4),
-                Arrays.asList(17,4,19,21,7,11,3,-5,7,9,-10,9,17,6,-6,-2,-4,-7,-12,-5,3,4,-21,-16,-2,-21));
+                Arrays.asList(17,4,19,21,7,11,3,-5,7,9,-10,9,17,6,-6,-2,-4,-7,-12,-5,3,4,-21,-16,-2,-21), "rotor1");
         rotor2 = new Rotor(Arrays.asList(3,17,22,18,16,7,5,1,-7,16,-3,8,2,9,2,-5,-1,-13,-12,-17,-11,-4,1,-10,-19,-25),
-                Arrays.asList(25,7,17,-3,13,19,12,3,-1,11,5,-5,-7,10,-2,1,-2,4,-17,-8,-16,-18,-9,-1,-22,-16));
+                Arrays.asList(25,7,17,-3,13,19,12,3,-1,11,5,-5,-7,10,-2,1,-2,4,-17,-8,-16,-18,-9,-1,-22,-16), "rotor2");
         rotor3 = new Rotor(Arrays.asList(1,16,5,17,20,8,-2,2,14,6,2,-5,-12,-10,9,10,5,-9,1,-14,-2,-10,-6,13,-10,-23),
-                Arrays.asList(12,-1,23,10,2,14,5,-5,9,-2,-13,10,-2,-8,10,-6,6,-16,2,-1,-17,-5,-14,-9,-20,-10));
+                Arrays.asList(12,-1,23,10,2,14,5,-5,9,-2,-13,10,-2,-8,10,-6,6,-16,2,-1,-17,-5,-14,-9,-20,-10), "rotor3");
         reflecteur = new Reflecteur(Arrays.asList(25,23,21,19,17,15,13,11,9,7,5,3,1,-1,-3,-5,-7,-9,-11,-13,-15,-17,-19,-21,-23,-25));
+
+        combobox1.setValue("Rotor 1");
+        combobox2.setValue("Rotor 2");
+        combobox3.setValue("Rotor 3");
+
+        txtDecalage1.setText("1");
+        txtDecalage2.setText("2");
+        txtDecalage3.setText("3");
 
         // ajouter les radios buttons droite/gauche au groupe
         rotor3radioGroup = new ToggleGroup();
@@ -77,41 +87,58 @@ public class Controller {
         }
 
         // Initialiser et affiche la liste des reflecteurs
-        updateRotor();
+        configBtnClick();
     }
 
     @FXML
     public void configBtnClick() {
-        // vérifier que tous les clés pour les rotors ont été configuré -> erreur
-        int txt1Value = Integer.parseInt(txtDecalage1.getText());
-        int txt2Value = Integer.parseInt(txtDecalage2.getText());
-        int txt3Value = Integer.parseInt(txtDecalage3.getText());
+        String errormessage = "";
+        try {
+            // vérifier que tous les clés pour les rotors ont été configuré -> erreur
+            int txt1Value = Integer.parseInt(txtDecalage1.getText());
+            int txt2Value = Integer.parseInt(txtDecalage2.getText());
+            int txt3Value = Integer.parseInt(txtDecalage3.getText());
 
-        // combo box get the value
-       String cb1Value = combobox1.getValue();
-       String cb2Value = combobox2.getValue();
-       String cb3Value = combobox3.getValue();
+            // combo box get the value
+            String cb1Value = combobox1.getValue();
+            String cb2Value = combobox2.getValue();
+            String cb3Value = combobox3.getValue();
 
-        // radio button group
-        Boolean radio1Value = convertDroiteGauche(((RadioButton)rotor1radioGroup.getSelectedToggle()).getText());
-        Boolean radio2Value = convertDroiteGauche(((RadioButton)rotor2radioGroup.getSelectedToggle()).getText());
-        Boolean radio3Value = convertDroiteGauche(((RadioButton)rotor3radioGroup.getSelectedToggle()).getText());
+            if(cb1Value == cb2Value || cb2Value == cb3Value || cb1Value == cb3Value)
+            {
+                throw new Exception("Veuillez vous assurez qu'il y a pas 2 rotor pareil");
+            }
 
-        prendreOrdreRotor(cb1Value, cb2Value, cb3Value);
+            lblRotor1.setText(cb1Value);
+            lblRotor2.setText(cb2Value);
+            lblRotor3.setText(cb3Value);
 
-        System.out.println(String.format("Entree de l'utilisateur: %s - %s - %s - %s - %s - %s -%s - %s - %s",
-                cb1Value, cb2Value, cb3Value, radio1Value, radio2Value, radio3Value, txt1Value, txt2Value, txt3Value));
+            // radio button group
+            Boolean radio1Value = convertDroiteGauche(((RadioButton) rotor1radioGroup.getSelectedToggle()).getText());
+            Boolean radio2Value = convertDroiteGauche(((RadioButton) rotor2radioGroup.getSelectedToggle()).getText());
+            Boolean radio3Value = convertDroiteGauche(((RadioButton) rotor3radioGroup.getSelectedToggle()).getText());
 
-        // decalage method
-        //test pour encrypter
-        rotor1.setDirection(radio1Value);
-        rotor2.setDirection(radio2Value);
-        rotor3.setDirection(radio3Value);
-        rotor1.setDecalage(txt1Value);
-        rotor2.setDecalage(txt2Value);
-        rotor3.setDecalage(txt3Value);
-        resetRotor();
-        updateRotor();
+            prendreOrdreRotor(cb1Value, cb2Value, cb3Value);
+
+            System.out.println(String.format("Entree de l'utilisateur: %s - %s - %s - %s - %s - %s -%s - %s - %s",
+                    cb1Value, cb2Value, cb3Value, radio1Value, radio2Value, radio3Value, txt1Value, txt2Value, txt3Value));
+
+            // decalage method
+            //test pour encrypter
+            rotor1.setDirection(radio1Value);
+            rotor2.setDirection(radio2Value);
+            rotor3.setDirection(radio3Value);
+            rotor1.setDecalage(txt1Value);
+            rotor2.setDecalage(txt2Value);
+            rotor3.setDecalage(txt3Value);
+            resetRotor();
+            updateRotor();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,
+                    e.getMessage());
+        }
     }
 
     private void prendreOrdreRotor(String selectedRotor1, String selectedRotor2, String selectedRotor3) {
@@ -157,82 +184,101 @@ public class Controller {
         System.out.println("decryper btn is clicked");
     }
 
-    public void updateRotor()
-    {
+    public void updateRotor() {
         reflecteurLabels = new ArrayList<>();
         reflecteurContainer.getChildren().clear();
-        for(Integer reflecteurElement: reflecteur.getReflecteur()) {
+        for (Integer reflecteurElement : reflecteur.getReflecteur()) {
             Label label = new Label(Integer.toString(reflecteurElement));
-            label.setPadding(new Insets(0,5,0,5));
+            label.setPadding(new Insets(0, 5, 0, 5));
             label.setStyle("-fx-border-color: black;");
             reflecteurLabels.add(label);
             reflecteurContainer.getChildren().add(label);
         }
 
+        ArrayList<List<Label>> listOfRotorLabels;
+
         // Initialiser et affiche la liste du rotor 1
-        rotor1P1Labels = new ArrayList<>();
-        rotor1ContainerP1.getChildren().clear();
-        for(Integer rotorElement: rotor1.getPasse1()) {
-            Label label = new Label(Integer.toString(rotorElement));
-            label.setPadding(new Insets(0,5,0,5));
-            label.setStyle("-fx-border-color: black;");
-            rotor1P1Labels.add(label);
-            rotor1ContainerP1.getChildren().add(label);
+        if (combobox1.getValue() == "Rotor 3") {
+            System.out.println("rotor 1");
+            listOfRotorLabels = endUpdateRouter(rotor3, rotor1P1Labels, rotor1ContainerP1, rotor1P2Labels, rotor1ContainerP2);
+            rotor1P1Labels = listOfRotorLabels.get(0);
+            rotor1P2Labels = listOfRotorLabels.get(1);
+        } else if (combobox1.getValue() == "Rotor 2") {
+            System.out.println("rotor 2");
+            listOfRotorLabels = endUpdateRouter(rotor2, rotor1P1Labels, rotor1ContainerP1, rotor1P2Labels, rotor1ContainerP2);
+            rotor1P1Labels = listOfRotorLabels.get(0);
+            rotor1P2Labels = listOfRotorLabels.get(1);
+        } else {
+
+            listOfRotorLabels = endUpdateRouter(rotor1, rotor1P1Labels, rotor1ContainerP1, rotor1P2Labels, rotor1ContainerP2);
+            rotor1P1Labels = listOfRotorLabels.get(0);
+            rotor1P2Labels = listOfRotorLabels.get(1);
         }
 
-        rotor1P2Labels = new ArrayList<>();
-        rotor1ContainerP2.getChildren().clear();
-        for(Integer rotorElement: rotor1.getPasse2()) {
-            Label label = new Label(Integer.toString(rotorElement));
-            label.setPadding(new Insets(0,5,0,5));
-            label.setStyle("-fx-border-color: black;");
-            rotor1P2Labels.add(label);
-            rotor1ContainerP2.getChildren().add(label);
-        }
 
         // Initialiser et affiche la liste du rotor 2
-        rotor2P1Labels = new ArrayList<>();
-        rotor2ContainerP1.getChildren().clear();
-        for(Integer rotorElement: rotor2.getPasse1()) {
-            Label label = new Label(Integer.toString(rotorElement));
-            label.setPadding(new Insets(0,5,0,5));
-            label.setStyle("-fx-border-color: black;");
-            rotor2P1Labels.add(label);
-            rotor2ContainerP1.getChildren().add(label);
+        if (combobox2.getValue() == "Rotor 3") {
+            listOfRotorLabels = endUpdateRouter(rotor3, rotor2P1Labels, rotor2ContainerP1, rotor2P2Labels, rotor2ContainerP2);
+            rotor2P1Labels = listOfRotorLabels.get(0);
+            rotor2P2Labels = listOfRotorLabels.get(1);
+        } else if (combobox2.getValue() == "Rotor 1") {
+            listOfRotorLabels = endUpdateRouter(rotor1, rotor2P1Labels, rotor2ContainerP1, rotor2P2Labels, rotor2ContainerP2);
+            rotor2P1Labels = listOfRotorLabels.get(0);
+            rotor2P2Labels = listOfRotorLabels.get(1);
         }
-
-        rotor2P2Labels = new ArrayList<>();
-        rotor2ContainerP2.getChildren().clear();
-        for(Integer rotorElement: rotor2.getPasse2()) {
-            Label label = new Label(Integer.toString(rotorElement));
-            label.setPadding(new Insets(0,5,0,5));
-            label.setStyle("-fx-border-color: black;");
-            rotor2P2Labels.add(label);
-            rotor2ContainerP2.getChildren().add(label);
+        else
+        {
+            listOfRotorLabels = endUpdateRouter(rotor2, rotor2P1Labels, rotor2ContainerP1, rotor2P2Labels, rotor2ContainerP2);
+            rotor2P1Labels = listOfRotorLabels.get(0);
+            rotor2P2Labels = listOfRotorLabels.get(1);
         }
 
         // Initialiser et affiche la liste du rotor 3
-        rotor3P1Labels = new ArrayList<>();
-        rotor3ContainerP1.getChildren().clear();
-        //creerLabelPasse1(rotor3, rotor3P2Labels, rotor3ContainerP2);
-        for(Integer rotorElement: rotor3.getPasse1()) {
-            Label label = new Label(Integer.toString(rotorElement));
-            label.setPadding(new Insets(0,5,0,5));
-            label.setStyle("-fx-border-color: black;");
-            rotor3P1Labels.add(label);
-            rotor3ContainerP1.getChildren().add(label);
+        if (combobox3.getValue() == "Rotor 1") {
+            listOfRotorLabels = endUpdateRouter(rotor1, rotor3P1Labels, rotor3ContainerP1, rotor3P2Labels, rotor3ContainerP2);
+            rotor3P1Labels = listOfRotorLabels.get(0);
+            rotor3P2Labels = listOfRotorLabels.get(1);
+        } else if (combobox3.getValue() == "Rotor 2") {
+            listOfRotorLabels = endUpdateRouter(rotor2, rotor3P1Labels, rotor3ContainerP1, rotor3P2Labels, rotor3ContainerP2);
+            rotor3P1Labels = listOfRotorLabels.get(0);
+            rotor3P2Labels = listOfRotorLabels.get(1);
+        }
+        else
+        {
+            listOfRotorLabels = endUpdateRouter(rotor3, rotor3P1Labels, rotor3ContainerP1, rotor3P2Labels, rotor3ContainerP2);
+            rotor3P1Labels = listOfRotorLabels.get(0);
+            rotor3P2Labels = listOfRotorLabels.get(1);
         }
 
-        rotor3P2Labels = new ArrayList<>();
-        rotor3ContainerP2.getChildren().clear();
-        //creerLabelPasse2(rotor3, rotor3P2Labels, rotor3ContainerP2);
-        for(Integer rotorElement: rotor3.getPasse2()) {
+    }
+
+    //rotor is the phisical rotor, rotorlabel is the list, rotorContainer is what position
+    public ArrayList<List<Label>> endUpdateRouter(Rotor rotor, List<Label> RotorLabel1, FlowPane RotorContainer1,
+                                List<Label> RotorLabel2, FlowPane RotorContainer2)
+    {
+        RotorLabel1 = new ArrayList<>();
+        RotorContainer1.getChildren().clear();
+        for(Integer rotorElement: rotor.getPasse1()) {
             Label label = new Label(Integer.toString(rotorElement));
             label.setPadding(new Insets(0,5,0,5));
             label.setStyle("-fx-border-color: black;");
-            rotor3P2Labels.add(label);
-            rotor3ContainerP2.getChildren().add(label);
+            RotorLabel1.add(label);
+            RotorContainer1.getChildren().add(label);
         }
+
+        RotorLabel2 = new ArrayList<>();
+        RotorContainer2.getChildren().clear();
+        for(Integer rotorElement: rotor.getPasse2()) {
+            Label label = new Label(Integer.toString(rotorElement));
+            label.setPadding(new Insets(0,5,0,5));
+            label.setStyle("-fx-border-color: black;");
+            RotorLabel2.add(label);
+            RotorContainer2.getChildren().add(label);
+        }
+        ArrayList<List<Label>> listOfRotorLabels = new ArrayList<List<Label>>();
+        listOfRotorLabels.add(RotorLabel1);
+        listOfRotorLabels.add(RotorLabel2);
+        return listOfRotorLabels;
     }
 
     // En commentaire pour creer des methodes generic pour creer les labels - doesn't work
@@ -269,13 +315,50 @@ public class Controller {
                 break;
             }
         }
-        entree = rotor1.PremierePasse(entree);
-        entree = rotor2.PremierePasse(entree);
-        entree = rotor3.PremierePasse(entree);
+        if(combobox1.getValue() == "Rotor 1")
+            entree = rotor1.PremierePasse(entree);
+        else if(combobox1.getValue() == "Rotor 2")
+            entree = rotor2.PremierePasse(entree);
+        else
+            entree = rotor3.PremierePasse(entree);
+
+        if(combobox2.getValue() == "Rotor 1")
+            entree = rotor1.PremierePasse(entree);
+        else if(combobox2.getValue() == "Rotor 2")
+            entree = rotor2.PremierePasse(entree);
+        else
+            entree = rotor3.PremierePasse(entree);
+
+        if(combobox3.getValue() == "Rotor 1")
+            entree = rotor1.PremierePasse(entree);
+        else if(combobox3.getValue() == "Rotor 2")
+            entree = rotor2.PremierePasse(entree);
+        else
+            entree = rotor3.PremierePasse(entree);
+
         entree = reflecteur.Reflection(entree);
-        entree = rotor3.DeuxiemePasse(entree);
-        entree = rotor2.DeuxiemePasse(entree);
-        entree = rotor1.DeuxiemePasse(entree);
+
+        if(combobox3.getValue() == "Rotor 1")
+            entree = rotor1.DeuxiemePasse(entree);
+        else if(combobox3.getValue() == "Rotor 2")
+            entree = rotor2.DeuxiemePasse(entree);
+        else
+            entree = rotor3.DeuxiemePasse(entree);
+
+        if(combobox2.getValue() == "Rotor 1")
+            entree = rotor1.DeuxiemePasse(entree);
+        else if(combobox2.getValue() == "Rotor 2")
+            entree = rotor2.DeuxiemePasse(entree);
+        else
+            entree = rotor3.DeuxiemePasse(entree);
+
+        if(combobox1.getValue() == "Rotor 1")
+            entree = rotor1.DeuxiemePasse(entree);
+        else if(combobox1.getValue() == "Rotor 2")
+            entree = rotor2.DeuxiemePasse(entree);
+        else
+            entree = rotor3.DeuxiemePasse(entree);
+
         rotor1.rotation();
         rotor2.rotation();
         rotor3.rotation();

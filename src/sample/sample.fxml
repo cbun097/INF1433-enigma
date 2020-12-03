@@ -16,18 +16,18 @@
          <children>
             <Label layoutX="706.0" layoutY="14.0" text="Réflecteur" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <TextArea fx:id="txtDecrypter" layoutX="289.0" layoutY="526.0" prefHeight="38.0" prefWidth="489.0" GridPane.columnIndex="4" GridPane.rowIndex="12" />
-            <Label layoutX="713.0" layoutY="117.0" text="Rotor 2" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-            <Label layoutX="713.0" layoutY="64.0" text="Rotor 3" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <Label fx:id="lblRotor2" layoutX="713.0" layoutY="117.0" text="Rotor 2" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <Label fx:id="lblRotor3" layoutX="713.0" layoutY="64.0" text="Rotor 3" GridPane.columnIndex="4" GridPane.rowIndex="4" />
             <Label layoutX="27.0" layoutY="320.0" text="Clé" GridPane.rowIndex="7" />
       <Label layoutX="582.0" layoutY="307.0" text="Décalage" />
             <TextField fx:id="txtDecalage3" layoutX="639.0" layoutY="380.0" />
             <TextField fx:id="txtDecalage2" layoutX="639.0" layoutY="347.0" />
             <TextField fx:id="txtDecalage1" layoutX="639.0" layoutY="303.0" />
-            <RadioButton fx:id="droiteR3" layoutX="432.0" layoutY="381.0" mnemonicParsing="false" text="Droite" />
+            <RadioButton fx:id="droiteR3" layoutX="432.0" layoutY="381.0" mnemonicParsing="false" selected="true" text="Droite" />
             <RadioButton fx:id="gaucheR3" layoutX="508.0" layoutY="381.0" mnemonicParsing="false" text="Gauche" />
             <RadioButton fx:id="gaucheR2" layoutX="508.0" layoutY="348.0" mnemonicParsing="false" text="Gauche" />
-            <RadioButton fx:id="droiteR2" layoutX="432.0" layoutY="348.0" mnemonicParsing="false" text="Droite" />
-            <RadioButton fx:id="droiteR1" layoutX="432.0" layoutY="310.0" mnemonicParsing="false" text="Droite" />
+            <RadioButton fx:id="droiteR2" layoutX="432.0" layoutY="348.0" mnemonicParsing="false" selected="true" text="Droite" />
+            <RadioButton fx:id="droiteR1" layoutX="432.0" layoutY="310.0" mnemonicParsing="false" selected="true" text="Droite" />
             <RadioButton fx:id="gaucheR1" layoutX="508.0" layoutY="310.0" mnemonicParsing="false" text="Gauche" />
             <Label layoutX="91.0" layoutY="345.0" prefHeight="17.0" prefWidth="167.0" text="Selectionner le deuxième rotor" GridPane.columnIndex="2" GridPane.rowIndex="8" />
             <Label layoutX="104.0" layoutY="423.0" prefHeight="37.0" prefWidth="208.0" text="Encrypter ou résultat décryption" />
@@ -36,7 +36,7 @@
               <Button layoutX="201.0" layoutY="473.0" mnemonicParsing="false" onAction="#configBtnClick" text="Configurer Rotors" />
               <Button layoutX="462.0" layoutY="473.0" mnemonicParsing="false" onAction="#etapeSuivanteBtn" prefHeight="25.0" prefWidth="107.0" text="Étape suivante" />
               <Button layoutX="590.0" layoutY="473.0" mnemonicParsing="false" onAction="#decrypterBtnClick" text="Décrypter" />
-            <Label layoutX="713.0" layoutY="179.0" text="Rotor 1" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Label fx:id="lblRotor1" layoutX="713.0" layoutY="179.0" text="Rotor 1" GridPane.columnIndex="4" GridPane.rowIndex="2" />
             <Label layoutX="91.0" layoutY="378.0" prefHeight="17.0" prefWidth="181.0" text="Selectionner le troisième rotor" GridPane.columnIndex="2" GridPane.rowIndex="7" />
       <TextArea fx:id="txtEncrypter" layoutX="295.0" layoutY="422.0" prefHeight="38.0" prefWidth="489.0" />
       <ComboBox fx:id="combobox1" layoutX="269.0" layoutY="303.0" prefWidth="150.0" />

@@ -3,14 +3,16 @@ package sample;
 import java.util.List;
 
 public class Rotor {
+    private String name;
     private List<Integer> passe1;
     private List<Integer> passe2;
     private Integer Decalage;
     private Boolean Direction; //true = droite, false = gauche
 
-    public Rotor(List<Integer> passe1, List<Integer> passe2) {
+    public Rotor(List<Integer> passe1, List<Integer> passe2, String name) {
         this.passe1 = passe1;
         this.passe2 = passe2;
+        this.name = name;
     }
 
     public void rotation(){
@@ -52,13 +54,13 @@ public class Rotor {
 
     public Integer PremierePasse(Integer Position)
     {
-        System.out.println("Premiere " + Position + " + " + this.passe1.get(Position) + " = " + ((Position + this.passe1.get(Position) + 26) % 26));
+        System.out.println(this.name + " Premiere " + Position + " + " + this.passe1.get(Position) + " = " + ((Position + this.passe1.get(Position) + 26) % 26));
         return ((Position + this.passe1.get(Position) + 26) % 26);
     }
 
     public Integer DeuxiemePasse(Integer Position)
     {
-        System.out.println("DieuxiemePasse " + Position + " + " + this.passe2.get(Position) + " = " + ((Position + this.passe2.get(Position) + 26) % 26));
+        System.out.println(this.name + " DieuxiemePasse " + Position + " + " + this.passe2.get(Position) + " = " + ((Position + this.passe2.get(Position) + 26) % 26));
         return ((Position + this.passe2.get(Position) + 26) % 26);
     }
 
