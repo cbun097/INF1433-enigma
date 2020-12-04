@@ -35,6 +35,7 @@ public class Controller {
     String[] rotorGauche = {"-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8","-9", "-10", "-11", "-12", "-13", "-14", "-15", "-16", "-17", "-18", "-19", "-20", "-21", "-22", "-23", "-24", "-25", "-26"};
     String[] alphabetArray = {"A", "B", "C", "D", "E", "F", "G", "H","I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
     String[] comboboxChoicesArray = {"Rotor 1", "Rotor 2", "Rotor 3"};
+    int compteur = 0;
 
     @FXML
     // tout ce qui est initialiser avant que l'application est lancée
@@ -156,21 +157,24 @@ public class Controller {
     public void encrypterBtnClick() {
         String Sorti = "";
         System.out.println("entree utilisateur " + txtEncrypter.getText());
-        for (char ch: txtEncrypter.getText().toCharArray()) {
-            Sorti += EncrypterUneLettre(ch).toString();
+        for (; compteur < txtEncrypter.getText().length(); compteur++) {
+            Sorti += EncrypterUneLettre(txtEncrypter.getText().toCharArray()[compteur]).toString();
         }
-        txtDecrypter.setText(Sorti);
+        txtDecrypter.appendText(Sorti);
         System.out.println("encryper btn is clicked");
     }
 
     @FXML
     public void etapeSuivanteBtn() {
-        Character sorti = EncrypterUneLettre(txtEncrypter.getText().toCharArray()[0]);
-        // afficher la nouvelle config
-        // encrypter
-        System.out.println("etape suivante btn is clicked");
-        // set la lettre apres avoir ete encrypte
-        txtDecrypter.appendText(sorti.toString());
+        if(compteur < txtEncrypter.getText().length()) {
+            Character sorti = EncrypterUneLettre(txtEncrypter.getText().toCharArray()[compteur]);
+            // afficher la nouvelle config
+            // encrypter
+            System.out.println("etape suivante btn is clicked");
+            // set la lettre apres avoir ete encrypte
+            txtDecrypter.appendText(sorti.toString());
+            compteur++;
+        }
     }
 
     @FXML
@@ -433,5 +437,21 @@ public class Controller {
                 Arrays.asList(25,7,17,-3,13,19,12,3,-1,11,5,-5,-7,10,-2,1,-2,4,-17,-8,-16,-18,-9,-1,-22,-16));
         rotor3.setRotor(Arrays.asList(1,16,5,17,20,8,-2,2,14,6,2,-5,-12,-10,9,10,5,-9,1,-14,-2,-10,-6,13,-10,-23),
                 Arrays.asList(12,-1,23,10,2,14,5,-5,9,-2,-13,10,-2,-8,10,-6,6,-16,2,-1,-17,-5,-14,-9,-20,-10));
+    }
+
+    @FXML
+    private void resetEncrypter()
+    {
+        txtEncrypter.setText("");
+        resetRotor();
+        compteur = 0;
+    }
+
+    @FXML
+    private void resetDecrypter()
+    {
+        txtDecrypter.setText("");
+        resetRotor();
+        compteur = 0;
     }
 }
