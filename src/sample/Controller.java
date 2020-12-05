@@ -268,6 +268,7 @@ public class Controller {
 
     public Character EncrypterUneLettre(Character lettre)
     {
+        updateRotor();
         int entree = 0;
         String entreeUtilisateur = lettre.toString().toUpperCase();
         System.out.println("lettre input" + lettre);
@@ -279,13 +280,16 @@ public class Controller {
                 break;
             }
         }
-        if(combobox1.getValue() == "Rotor 1")
+
+        updateCouleurRotors(rotor1P1Labels, entree, true);
+        if(combobox1.getValue() == "Rotor 1") 
             entree = rotor1.PremierePasse(entree);
         else if(combobox1.getValue() == "Rotor 2")
             entree = rotor2.PremierePasse(entree);
         else
             entree = rotor3.PremierePasse(entree);
 
+        updateCouleurRotors(rotor2P1Labels, entree, true);
         if(combobox2.getValue() == "Rotor 1")
             entree = rotor1.PremierePasse(entree);
         else if(combobox2.getValue() == "Rotor 2")
@@ -293,6 +297,7 @@ public class Controller {
         else
             entree = rotor3.PremierePasse(entree);
 
+        updateCouleurRotors(rotor3P1Labels, entree, true);
         if(combobox3.getValue() == "Rotor 1")
             entree = rotor1.PremierePasse(entree);
         else if(combobox3.getValue() == "Rotor 2")
@@ -301,7 +306,10 @@ public class Controller {
             entree = rotor3.PremierePasse(entree);
 
         entree = reflecteur.Reflection(entree);
+        updateCouleurRotors(reflecteurLabels ,getInputRelecteur((entree)), true);
+        updateCouleurRotors(reflecteurLabels ,(entree), false);
 
+        updateCouleurRotors(rotor3P2Labels, entree, false);
         if(combobox3.getValue() == "Rotor 1")
             entree = rotor1.DeuxiemePasse(entree);
         else if(combobox3.getValue() == "Rotor 2")
@@ -309,6 +317,7 @@ public class Controller {
         else
             entree = rotor3.DeuxiemePasse(entree);
 
+        updateCouleurRotors(rotor2P2Labels, entree, false);
         if(combobox2.getValue() == "Rotor 1")
             entree = rotor1.DeuxiemePasse(entree);
         else if(combobox2.getValue() == "Rotor 2")
@@ -316,6 +325,8 @@ public class Controller {
         else
             entree = rotor3.DeuxiemePasse(entree);
 
+
+        updateCouleurRotors(rotor1P2Labels, entree, false);
         if(combobox1.getValue() == "Rotor 1")
             entree = rotor1.DeuxiemePasse(entree);
         else if(combobox1.getValue() == "Rotor 2")
@@ -326,19 +337,11 @@ public class Controller {
         rotor1.rotation();
         rotor2.rotation();
         rotor3.rotation();
-        updateRotor();
 
         Character sortie = alphabetArray[entree].toCharArray()[0];
         updateCouleur(alphabetLabels, lettre, true);
         updateCouleur(alphabetLabels, sortie, false);
-        updateCouleurRotors(rotor1P1Labels ,rotor1.PremierePasse(entree), true);
-        updateCouleurRotors(rotor1P2Labels ,rotor1.DeuxiemePasse(entree), false);
-        updateCouleurRotors(rotor2P1Labels ,rotor2.PremierePasse(entree), true);
-        updateCouleurRotors(rotor2P2Labels ,rotor2.DeuxiemePasse(entree), false);
-        updateCouleurRotors(rotor3P1Labels ,rotor3.PremierePasse(entree), true);
-        updateCouleurRotors(rotor3P2Labels ,rotor3.DeuxiemePasse(entree), false);
-        updateCouleurRotors(reflecteurLabels ,getInputRelecteur(reflecteur.Reflection(entree)), true);
-        updateCouleurRotors(reflecteurLabels ,reflecteur.Reflection(entree), false);
+
 
         return sortie;
     }
