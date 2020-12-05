@@ -39,7 +39,7 @@ public class Controller {
     private void initialize() {
         ObservableList obstListCmb = FXCollections.observableArrayList(comboboxChoicesArray);
 
-        rotor1 = new Rotor(Arrays.asList(10,21,5,-17,21,-4,12,16,6,-3,7,-7,4,2,5,-6,-11,-17,-9,-6,-9,-19,2,-3,-21,-4),
+        rotor1 = new Rotor(Arrays.asList(10,21,5,-17,21,-4,12,16,6,-3,7,-7,4,2,5,-7,-11,-17,-9,-6,-9,-19,2,-3,-21,-4),
                 Arrays.asList(17,4,19,21,7,11,3,-5,7,9,-10,9,17,6,-6,-2,-4,-7,-12,-5,3,4,-21,-16,-2,-21), "rotor1");
         rotor2 = new Rotor(Arrays.asList(3,17,22,18,16,7,5,1,-7,16,-3,8,2,9,2,-5,-1,-13,-12,-17,-11,-4,1,-10,-19,-25),
                 Arrays.asList(25,7,17,-3,13,19,12,3,-1,11,5,-5,-7,10,-2,1,-2,4,-17,-8,-16,-18,-9,-1,-22,-16), "rotor2");
@@ -269,7 +269,7 @@ public class Controller {
     public Character EncrypterUneLettre(Character lettre)
     {
         updateRotor();
-        int entree = 0;
+        int entree = 30;
         String entreeUtilisateur = lettre.toString().toUpperCase();
         System.out.println("lettre input" + lettre);
         for(int i = 0; i < alphabetArray.length; i++)
@@ -281,6 +281,10 @@ public class Controller {
             }
         }
 
+        if(entree == 30)
+        {
+            return lettre;
+        }
         updateCouleurRotors(rotor1P1Labels, entree, true);
         if(combobox1.getValue() == "Rotor 1") 
             entree = rotor1.PremierePasse(entree);
@@ -408,7 +412,7 @@ public class Controller {
 
     private void resetRotor()
     {
-        rotor1.setRotor(Arrays.asList(10,21,5,-17,21,-4,12,16,6,-3,7,-7,4,2,5,-6,-11,-17,-9,-6,-9,-19,2,-3,-21,-4),
+        rotor1.setRotor(Arrays.asList(10,21,5,-17,21,-4,12,16,6,-3,7,-7,4,2,5,-7,-11,-17,-9,-6,-9,-19,2,-3,-21,-4),
                 Arrays.asList(17,4,19,21,7,11,3,-5,7,9,-10,9,17,6,-6,-2,-4,-7,-12,-5,3,4,-21,-16,-2,-21));
         rotor2.setRotor(Arrays.asList(3,17,22,18,16,7,5,1,-7,16,-3,8,2,9,2,-5,-1,-13,-12,-17,-11,-4,1,-10,-19,-25),
                 Arrays.asList(25,7,17,-3,13,19,12,3,-1,11,5,-5,-7,10,-2,1,-2,4,-17,-8,-16,-18,-9,-1,-22,-16));
