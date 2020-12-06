@@ -104,9 +104,6 @@ public class Controller {
             Boolean radio2Value = convertDroiteGauche(((RadioButton) rotor2radioGroup.getSelectedToggle()).getText());
             Boolean radio3Value = convertDroiteGauche(((RadioButton) rotor3radioGroup.getSelectedToggle()).getText());
 
-            System.out.println(String.format("Entree de l'utilisateur: %s - %s - %s - %s - %s - %s -%s - %s - %s",
-                    cb1Value, cb2Value, cb3Value, radio1Value, radio2Value, radio3Value, txt1Value, txt2Value, txt3Value));
-
             // Set les directions selon le input de l'utilisateur
             rotor1.setDirection(radio1Value);
             rotor2.setDirection(radio2Value);
@@ -134,7 +131,6 @@ public class Controller {
     @FXML
     public void encrypterBtnClick() {
         String Sorti = "";
-        System.out.println("entree utilisateur " + txtEncrypter.getText());
         for (; compteur < txtEncrypter.getText().length(); compteur++) {
             Sorti += EncrypterUneLettre(txtEncrypter.getText().toCharArray()[compteur]).toString();
         }
@@ -153,7 +149,6 @@ public class Controller {
     @FXML
     public void decrypterBtnClick() {
         String Sorti = "";
-        System.out.println("entree utilisateur " + txtDecrypter.getText());
         for (char ch: txtDecrypter.getText().toCharArray()) {
             Sorti += EncrypterUneLettre(ch).toString();
         }
@@ -185,12 +180,10 @@ public class Controller {
 
         // Initialiser et affiche la liste du rotor 1
         if (combobox1.getValue() == "Rotor 3") {
-            System.out.println("rotor 1");
             listOfRotorLabels = endUpdateRouter(rotor3, rotor1P1Labels, rotor1ContainerP1, rotor1P2Labels, rotor1ContainerP2);
             rotor1P1Labels = listOfRotorLabels.get(0);
             rotor1P2Labels = listOfRotorLabels.get(1);
         } else if (combobox1.getValue() == "Rotor 2") {
-            System.out.println("rotor 2");
             listOfRotorLabels = endUpdateRouter(rotor2, rotor1P1Labels, rotor1ContainerP1, rotor1P2Labels, rotor1ContainerP2);
             rotor1P1Labels = listOfRotorLabels.get(0);
             rotor1P2Labels = listOfRotorLabels.get(1);
@@ -271,7 +264,6 @@ public class Controller {
         updateRotor();
         int entree = 30;
         String entreeUtilisateur = lettre.toString().toUpperCase();
-        System.out.println("lettre input" + lettre);
         for(int i = 0; i < alphabetArray.length; i++)
         {
             if(alphabetArray[i].equals(entreeUtilisateur))
@@ -375,7 +367,6 @@ public class Controller {
         for (Label labelToUpdate : labelsList) {
             if (lettre.equals(labelToUpdate.getText().toCharArray()[0])) {
                 if(entree){
-                    System.out.println("entree input to update" + lettre);
                     labelToUpdate.setTextFill(Color.web("#CC0000"));
                     labelToUpdate.setStyle("-fx-border-color: black;-fx-font-weight: bold;");
                 }
