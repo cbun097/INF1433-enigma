@@ -54,13 +54,11 @@ public class Rotor {
 
     public Integer PremierePasse(Integer Position)
     {
-        System.out.println(this.name + " Premiere " + Position + " + " + this.passe1.get(Position) + " = " + ((Position + this.passe1.get(Position) + 26) % 26));
         return ((Position + this.passe1.get(Position) + 26) % 26);
     }
 
     public Integer DeuxiemePasse(Integer Position)
     {
-        System.out.println(this.name + " DieuxiemePasse " + Position + " + " + this.passe2.get(Position) + " = " + ((Position + this.passe2.get(Position) + 26) % 26));
         return ((Position + this.passe2.get(Position) + 26) % 26);
     }
 
@@ -94,21 +92,3 @@ public class Rotor {
         this.Direction = direction;
     }
 }
-
-
-
-/*
-//met une varible temporaire pour tout deplacer
-                Integer temp1 = this.arraytest[0][25];
-                Integer temp2 = this.arraytest[1][25];
-                //deplace les valeur a l'index 25 a l'index 1
-                for (int a = 25; a>0; a--)
-                {
-                    this.arraytest[0][a] = this.arraytest[0][a-1];
-                    this.arraytest[1][a] = this.arraytest[1][a-1];
-                }
-                //met la valeur temp au debut
-                this.arraytest[0][0] = temp1;
-                this.arraytest[1][0] = temp2;
-
- */
